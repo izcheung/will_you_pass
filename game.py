@@ -90,4 +90,13 @@ def print_location_map(player, area_description):
 # Criteria 7
 
 
+def get_user_choice():
+    while True:
+        direction = input('[1] North, [2] South, [3] East, [4] West\nPlease enter the number that corresponds to/'
+                        'the direction you want to go: ')
+        if direction in ['1', '2', '3', '4']:
+            return direction
+        else:
+            print("Invalid direction.")
+
 

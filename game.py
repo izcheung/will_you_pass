@@ -117,3 +117,18 @@ def validate_move(player, area_description, direction):
     else:
         return True
 
+
+def move_character(player, direction):
+    if direction == '1':
+        player['position'][1] -= 1
+    if direction == '2':
+        player['position'][1] += 1
+    if direction == '3':
+        player['position'][0] += 1
+    if direction == '4':
+        player['position'][0] -= 1
+
+    return player
+
+
+# Issues

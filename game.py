@@ -9,3 +9,9 @@ def welcome_message():
     input("Type anything to get started! ")
     return player_name
 
+
+def make_character(player_name):
+    player = {'name': player_name, 'level': 1, 'position': [3, 1], 'location': 'bedroom'}
+    return player
+
+

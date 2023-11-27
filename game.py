@@ -40,3 +40,23 @@ def check_location_map(player):
         if player['location'] == area:
             return area_description
 
+
+def add_map_boundaries(area_description):
+    y_axis = area_description["rows"]
+    x_axis = area_description["columns"]
+
+    first_last_rows = [0, y_axis - 1]
+    for row in first_last_rows:
+        for column in range(x_axis):
+            wall = (column, row)
+            area_description["obstacles"].append(tuple(wall))
+
+    first_last_columns = [0, x_axis - 1]
+    for column in first_last_columns:
+        for row in range(y_axis):
+            wall = (column, row)
+            if wall in area_description["obstacles"]:
+                continue
+            else:
+                area_description["obstacles"].append(tuple(wall))
+

@@ -60,3 +60,34 @@ def add_map_boundaries(area_description):
             else:
                 area_description["obstacles"].append(tuple(wall))
 
+
+def print_location_map(player, area_description):
+    print(player["position"])
+    for row in range(area_description["rows"]):
+        for column in range(area_description["columns"]):
+            coordinate = [column, row]
+            if coordinate == player['position']:
+                print('*', end="")
+            elif tuple(coordinate) in area_description["obstacles"]:
+                print('#', end="")
+            elif tuple(coordinate) in area_description["door"]:
+                print('X', end="")
+            else:
+                print(' ', end="")
+        print()
+    print()
+
+
+#     # north_wall = coordinate[0] == 0
+#     # west_wall = coordinate[1] == 0
+#     # east_wall = coordinate[0] == columns - 1
+#     # south_wall = coordinate[1] == rows - 1
+#     # if north_wall or south_wall:
+#     #     print('-', end='')
+#     # elif east_wall or west_wall:
+#     #     print('|', end='')
+
+# Criteria 7
+
+
+

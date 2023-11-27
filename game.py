@@ -148,3 +148,32 @@ def change_location(player):
 
     return player
 
+
+def game():
+    player_name = welcome_message()
+    character = make_character(player_name)
+    officially_dating = False
+    while not officially_dating:
+        current_location = check_location_map(character)
+        add_map_boundaries(current_location)
+        print_location_map(character, current_location)
+        direction = get_user_choice()
+        valid_move = validate_move(character, current_location, direction)
+        if valid_move:
+            move_character(character, direction)
+            character = change_location(character)
+            print_location_map(character, current_location)
+        else:
+            print("You can't go there!")
+    print("Congratulations!")
+
+# move_character()
+# change_location()
+# area = check_location_map()
+# print_location_map(area)
+
+def main():
+    game()
+
+
+main()

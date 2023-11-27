@@ -100,3 +100,20 @@ def get_user_choice():
             print("Invalid direction.")
 
 
+def validate_move(player, area_description, direction):
+    new_coordinate = player["position"].copy()
+    if direction == "1":
+        new_coordinate[1] -= 1
+    elif direction == "2":
+        new_coordinate[1] += 1
+    elif direction == "3":
+        new_coordinate[0] += 1
+    elif direction == "4":
+        new_coordinate[0] -= 1
+    # else?
+
+    if tuple(new_coordinate) in area_description["obstacles"]:
+        return False
+    else:
+        return True
+

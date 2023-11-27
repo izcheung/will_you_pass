@@ -132,3 +132,19 @@ def move_character(player, direction):
 
 
 # Issues
+
+def change_location(player):
+    if player['position'] == [5, 6] and player['location'] == 'bedroom':
+        player['location'] = 'path'
+        player['position'] = [3, 1]
+    if player['position'] == [3, 1] and player['location'] == 'path':
+        player['location'] = 'bedroom'
+        player['position'] = [5, 6]
+    if player['position'] == [4, 9] and player['location'] == 'path':
+        player['location'] = 'another_room'
+        player['position'] = [1, 2]
+    if player['position'] == [1, 2] and player['location'] == 'another_room':
+        player['location'] = 'path'
+
+    return player
+

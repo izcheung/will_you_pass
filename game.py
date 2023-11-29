@@ -1,3 +1,6 @@
+
+import random
+
 def welcome_message():
     print("Welcome to Swipe Right!")
     player_name = input("Please enter your character name: ")
@@ -11,7 +14,7 @@ def welcome_message():
 
 
 def make_character(player_name):
-    player = {'name': player_name, 'level': 1, 'position': [3, 1], 'location': 'bedroom'}
+    player = {'name': player_name, 'level': 1, 'XP': 0, 'position': [3, 1], 'location': 'bedroom'}
     return player
 
 
@@ -62,7 +65,7 @@ def add_map_boundaries(area_description):
 
 
 def print_location_map(player, area_description):
-    print(player["position"])
+
     for row in range(area_description["rows"]):
         for column in range(area_description["columns"]):
             coordinate = [column, row]
@@ -75,6 +78,7 @@ def print_location_map(player, area_description):
             else:
                 print(' ', end="")
         print()
+    print(f'You are at position {player["position"]}')
     print()
 
 
@@ -97,7 +101,7 @@ def get_user_choice():
         if direction in ['1', '2', '3', '4']:
             return direction
         else:
-            print("Invalid direction.")
+            print("Invalid direction. ")
 
 
 def validate_move(player, area_description, direction):
@@ -130,6 +134,13 @@ def move_character(player, direction):
 
     return player
 
+def run_into_relatives():
+    chance_of_running_into_relatives = random.randint(1, 4)
+    if chance_of_running_into_relatives == 1:
+        return True
+    else:
+        return False
+
 
 # Issues
 
@@ -149,6 +160,8 @@ def change_location(player):
     return player
 
 
+
+
 def game():
     player_name = welcome_message()
     character = make_character(player_name)
@@ -163,14 +176,12 @@ def game():
             move_character(character, direction)
             character = change_location(character)
             print_location_map(character, current_location)
+            run_into_relatives()
         else:
             print("You can't go there!")
     print("Congratulations!")
 
-# move_character()
-# change_location()
-# area = check_location_map()
-# print_location_map(area)
+
 
 def main():
     game()

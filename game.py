@@ -159,6 +159,16 @@ def auntie_encounter(player):
         print(f'Your self-esteem takes a hit! -{aunt_attack_moves.get(random_attack)} points. Current HP is {player['self-esteem']}')
 
 
+def generate_flowers(player, area_description):
+    list_of_empty_coordinates = []
+    for x_coordinate in range(area_description["columns"]):
+        for y_coordinate in range(area_description["rows"]):
+            if (x_coordinate, y_coordinate) not in area_description["obstacles"] and (x_coordinate, y_coordinate) != (player['position']):
+                list_of_empty_coordinates.append((x_coordinate, y_coordinate))
+    flower_coordinates = random.sample(list_of_empty_coordinates, 5)
+    return flower_coordinates
+
+
 def level_up(player, aunt_attack_moves):
     if player["maturity"] >= 500:
         print("You leveled up to Level 3!")

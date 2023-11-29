@@ -4,8 +4,6 @@ import random
 def welcome_message():
     print("Welcome to Swipe Right!")
     player_name = input("Please enter your character name: ")
-    # player_gender = input("Please choose the letter that matches your character gender: /"
-    #                       "ex: [F] Female, [M] Male, [O] Other")
     print(
         f"Welcome to Swipe Right {player_name}! You are a hopeless romantic who has been vying for the attention of the gorgeous class "
         "president. To get their attention, you have devised a plan to collect flowers and gift it to them on Valentine's day. Your first task is to go and collect 10 flowers.")
@@ -14,7 +12,7 @@ def welcome_message():
 
 
 def make_character(player_name):
-    player = {'name': player_name, 'level': 1, 'XP': 0, 'position': [3, 1], 'location': 'bedroom'}
+    player = {'name': player_name, 'level': 1, 'maturity': 0, 'self-esteem': 10, 'position': [3, 1], 'location': 'bedroom', 'flowers': 0}
     return player
 
 
@@ -64,7 +62,8 @@ def add_map_boundaries(area_description):
                 area_description["obstacles"].append(tuple(wall))
 
 
-def print_location_map(player, area_description):
+
+def print_location_map(player, area_description, flower_coordinates):
 
     for row in range(area_description["rows"]):
         for column in range(area_description["columns"]):
@@ -75,6 +74,8 @@ def print_location_map(player, area_description):
                 print('#', end="")
             elif tuple(coordinate) in area_description["door"]:
                 print('X', end="")
+            elif tuple(coordinate) in flower_coordinates:
+                print('!', end="")
             else:
                 print(' ', end="")
         print()
@@ -134,12 +135,59 @@ def move_character(player, direction):
 
     return player
 
+
 def run_into_relatives():
-    chance_of_running_into_relatives = random.randint(1, 4)
+    chance_of_running_into_relatives = random.randint(1, 5)
     if chance_of_running_into_relatives == 1:
         return True
     else:
         return False
+
+
+def auntie_encounter(player):
+    aunt_attack_moves = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2, "'Have you recently gained weight?'": 3, "'My son is sooo successful blah blah..., what are you doing these days?'": 4}
+    print("You ran into your aunt!")
+    random_attack = random.choice(list(aunt_attack_moves.keys()))
+    print(f"Your aunt attacks with: {random_attack}")
+    dodge = input("Guess the right number (1 to 4) to run away: ")
+    correct_number = random.randint(1, 4)
+    if dodge == correct_number:
+        player['maturity'] += 25
+        print(f"You brush it off and your maturity is now {player['maturity']}!")
+    else:
+        player['self-esteem'] -= aunt_attack_moves.get(random_attack)
+        print(f'Your self-esteem takes a hit! -{aunt_attack_moves.get(random_attack)} points. Current HP is {player['self-esteem']}')
+
+
+def level_up(player, aunt_attack_moves):
+    if player["maturity"] >= 500:
+        print("You leveled up to Level 3!")
+        player["level"] += 1
+        player["self-esteem"] += 30
+        for each_attack_move in aunt_attack_moves:
+            aunt_attack_moves[each_attack_move] *= 4
+        unlock_map()
+
+    elif player["maturity"] >= 250:
+        print("You leveled up to Level 2!")
+        player["level"] += 1
+        player["self-esteem"] += 20
+        for each_attack_move in aunt_attack_moves:
+            aunt_attack_moves[each_attack_move] *= 3
+        unlock_map()
+
+
+    elif player["maturity"] >= 100:
+        print("You leveled up to Level 1!")
+        player["level"] += 1
+        player["self-esteem"] += 10
+        for each_attack_move in aunt_attack_moves:
+            aunt_attack_moves[each_attack_move] *= 2
+        unlock_map()
+
+
+def unlock_map():
+    pass
 
 
 # Issues
@@ -161,7 +209,6 @@ def change_location(player):
 
 
 
-
 def game():
     player_name = welcome_message()
     character = make_character(player_name)
@@ -169,19 +216,19 @@ def game():
     while not officially_dating:
         current_location = check_location_map(character)
         add_map_boundaries(current_location)
-        print_location_map(character, current_location)
+        flower_coordinates = generate_flowers(character, current_location)
+        print_location_map(character, current_location, flower_coordinates)
         direction = get_user_choice()
         valid_move = validate_move(character, current_location, direction)
         if valid_move:
             move_character(character, direction)
             character = change_location(character)
-            print_location_map(character, current_location)
-            run_into_relatives()
+            print_location_map(character, current_location, flower_coordinates)
+            if run_into_relatives():
+                auntie_encounter(character)
         else:
-            print("You can't go there!")
+            print("\nYou can't go there!")
     print("Congratulations!")
-
-
 
 def main():
     game()

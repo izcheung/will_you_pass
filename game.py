@@ -432,7 +432,16 @@ def check_level(player, surprise_questions):
 
 
 def update_HP_based_on_intelligence_for_final_exam(player):
+    """
+    Adjusts player health points based on intelligence points.
 
+    :param player: a dictionary representing the character created for this game
+    :precondition: player are provided in the correct format
+    :precondition: character has greater than 0 HP
+    :precondition: character location must room 645 and position is (6, 1)
+    :postcondition: updates HP to 3 if player intelligence is equal or greater than 1000, 2 HP for 500, and 1 HP for
+        less than 500
+    """
     if player['intelligence'] >= 1000:
         player['HP'] = 3
     elif player['intelligence'] >= 500:

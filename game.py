@@ -251,8 +251,11 @@ def move_character(player, direction):
 
 def quiz_probability():
     """
-    Simulate probability of having a quiz in the game.
+    Generate a surprise pop quiz 20% of the time after each move.
 
+    :precondition: user must have had moved to a new coordinate
+    :precondition: character has greater than 0 HP
+    :postcondition: randomly generate surprise pop quizzes 20% of the time for each move
     :return: True when the probability of getting a quiz is equal to 1 (out of 5 numbers), and False otherwise.
     """
     probability_of_getting_a_quiz = random.randint(1, 5)
@@ -263,6 +266,13 @@ def quiz_probability():
 
 
 def make_quiz_questions():
+    """
+    Creates a dictionary of surprise quiz questions.
+
+
+    :return:
+    """
+
     surprise_questions = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2,
                          "'Have you recently gained weight?'": 3,
                          "'My son is sooo successful blah blah..., what are you doing these days?'": 4}

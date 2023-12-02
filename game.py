@@ -337,11 +337,20 @@ def level_up_to_3(player, surprise_questions):
     return chocolate_coordinates
 
 
-def print_stats(player):
-    print(player)
-
-
 def level_up_to_2(player, surprise_questions):
+    """
+    Sets up the game for when character advances to level 2.
+
+    :param player: a dictionary representing the character created for this game
+    :param surprise_questions: a dictionary of surprise pop quiz questions
+    :precondition: player and surprise_questions are provided in the correct format
+    :preconditiion: player must be at level 1 and have 5 chocolates
+    :precondition: character has greater than 0 HP
+    :postcondition: increase player level by 1, HP by 10
+    :postcondition: set location to student_lounge with a list of chocolate coordinates tuples and position to [3, 1]
+    :postcondition: double the damage for each question
+    :return: the list of chocolate coordinates associated with the location
+    """
     print("YOU LEVELED UP TO LEVEL 2!")
     player["level"] += 1
     player["HP"] += 10
@@ -355,16 +364,30 @@ def level_up_to_2(player, surprise_questions):
     return chocolate_coordinates
 
 
-# player, chocolate_coordinates
+def print_stats(player):
+    print(player)
+
+
 def pick_up_chocolate(player, chocolate_coordinates):
+    """
+    Pick up a chocolate at the character's position.
+
+    :param player: a dictionary representing the character created for this game
+    :param chocolate_coordinates: a list of tuples representing the coordinates of chocolates on the map
+    :precondition: player and chocolate_coordinates are provided in the correct format
+    :precondition: character has greater than 0 HP
+    :postcondition: remove the corresponding chocolate coordinate when player's position matches that coordinate
+    :return: a list of tuples representing the coordinates of the remaining chocolates on the map
+    """
     if tuple(player["position"]) in chocolate_coordinates:
         player["chocolate"] += 1
-        print(f"\nYou picked up a Reese's chocholate! You now have {player["chocolate"]}.\n")
+        print(f"\nYou picked up a Reese's chocolate! You now have {player["chocolate"]}.\n")
         chocolate_coordinates.remove(tuple(player["position"]))
         return chocolate_coordinates
 
 
 def is_alive(player):
+
     if player["HP"] > 0:
         return True
     else:

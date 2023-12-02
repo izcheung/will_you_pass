@@ -269,8 +269,9 @@ def make_quiz_questions():
     """
     Creates a dictionary of surprise quiz questions.
 
-
-    :return:
+    :precondition: character has greater than 0 HP
+    :postcondition: correctly creates a dictionary of questions as keys, and the correct answer as the value
+    :return: a dictionary of surprise pop quiz questions.
     """
 
     surprise_questions = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2,

@@ -226,6 +226,17 @@ def validate_move(player, area_description, direction):
 
 
 def move_character(player, direction):
+    """
+    Updates the character's position in the character dictionary.
+
+    :param player: a dictionary representing the character created for this game
+    :param direction: a string representing the direction chosen by the user
+    :precondition: move has been validated to be within the board bounds
+    :precondition: character and direction are provided in the correct format
+    :precondition: character has greater than 0 HP
+    :postcondition: correctly change the character coordinates based on the direction input
+    #ADD
+    """
     if direction == '1':
         player['position'][1] -= 1
     if direction == '2':
@@ -239,6 +250,7 @@ def move_character(player, direction):
 
 
 def quiz_probability():
+
     chance_of_running_into_relatives = random.randint(1, 5)
     if chance_of_running_into_relatives == 1:
         return True

@@ -9,7 +9,6 @@ def welcome_message():
     :postcondition: uses the name of the player's character within the welcome message
     :return: the name of the player's character as a string
     """
-
     player_name = input("Please enter your character name: ")
     print(
         f"Welcome to Pass COMP1510 {player_name}! You are a hopeless student who achieved a final grade of 49.9% in COMP1510. Out of desperation, you made a devious plan to bribe Chris.  Your first task is to collect 5 Reese's chocolates.")
@@ -36,24 +35,35 @@ def make_character(player_name):
     {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', \
     'chocolate': 0}
     """
-    player = {'name': player_name, 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', \
+    player = {'name': player_name, 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub',
               'chocolate': 0}
     return player
 
 
 def give_location_description(player):
+    """
+    Returns a dictionary representing the description of a particular area.
+
+    :param player: a dictionary representing a character created for this game
+    :precondition: the player is provided in the correct format
+    :postcondition: correctly return the dictionary that matches the character's current location
+    :return: a dictionary with information on the character's current location
+    """
 
     areas = {
             'tech_hub': {
                     'rows': 8,
                     'columns': 7,
-                    'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)],
+                    'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5),
+                                  (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)],
                     'Chris': None
             },
             'student_lounge': {
                     'rows': 10,
                     'columns': 7,
-                    'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)],
+                    'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3),
+                                  (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7),
+                                  (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)],
                     'Chris': None
             },
             'room_645': {

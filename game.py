@@ -250,9 +250,13 @@ def move_character(player, direction):
 
 
 def quiz_probability():
+    """
+    Simulate probability of having a quiz in the game.
 
-    chance_of_running_into_relatives = random.randint(1, 5)
-    if chance_of_running_into_relatives == 1:
+    :return: True when the probability of getting a quiz is equal to 1 (out of 5 numbers), and False otherwise.
+    """
+    probability_of_getting_a_quiz = random.randint(1, 5)
+    if probability_of_getting_a_quiz == 1:
         return True
     else:
         return False

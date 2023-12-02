@@ -48,8 +48,17 @@ def give_location_description(player):
     :precondition: the player is provided in the correct format
     :postcondition: correctly return the dictionary that matches the character's current location
     :return: a dictionary with information on the character's current location
+    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1],
+    'location': 'tech_hub', 'chocolate': 0}
+    >>> give_location_description(character)
+    {
+        'rows': 8,
+        'columns': 7,
+        'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5),
+                      (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)],
+        'Chris': None
+    }
     """
-
     areas = {
             'tech_hub': {
                     'rows': 8,

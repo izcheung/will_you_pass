@@ -387,7 +387,14 @@ def pick_up_chocolate(player, chocolate_coordinates):
 
 
 def is_alive(player):
+    """
+    Checks if the character is alive based on its HP points.
 
+    :param player: a dictionary representing the character created for this game
+    :precondition: player is provided in the correct format
+    :postcondition: correctly checks if the character is alive with HP greater than 0 and False otherwise
+    :return: a boolean - True if the HP is greater than zero and False otherwise
+    """
     if player["HP"] > 0:
         return True
     else:

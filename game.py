@@ -125,7 +125,17 @@ def add_map_boundaries(area_description):
 
 
 def generate_chocolate(player, area_description):
- 
+    """
+    Returns a list of randomly generated coordinates of chocolates in the game.
+
+    This function generates chocolates within the game area excluding the player's position and map obstacles.
+
+    :param player: a dictionary representing a character created for this game
+    :param area_description: a dictionary with information on the character's current location
+    :precondition: player and area_description are provided in the correct format
+    :return: a list of tuple representing the coordinates of chocolates on the map
+    """
+
     list_of_empty_coordinates = []
     for x_coordinate in range(area_description["columns"]):
         for y_coordinate in range(area_description["rows"]):
@@ -143,6 +153,7 @@ def print_map(player, area_description, chocolate_coordinates):
     :param area_description: a dictionary with information on the character's current location
     :param chocolate_coordinates: a list of tuples representing the coordinates of chocolates in the game
     :precondition: player, area_description, and chocolate_coordinates are in the correct format
+    # ADD
     """
     for row in range(area_description["rows"]):
         for column in range(area_description["columns"]):

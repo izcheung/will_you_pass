@@ -1,40 +1,41 @@
 
 import random
 
+
 def welcome_message():
-    print("Welcome to Swipe Right!")
+
     player_name = input("Please enter your character name: ")
     print(
-        f"Welcome to Swipe Right {player_name}! You are a hopeless romantic who has been vying for the attention of the gorgeous class "
-        "president. To get their attention, you have devised a plan to collect flowers and gift it to them on Valentine's day. Your first task is to go and collect 10 flowers.")
+        f"Welcome to Pass COMP1510 {player_name}! You are a hopeless student who achieved a final grade of 49.9% in COMP1510. Out of desperation, you made a devious plan to bribe Chris.  Your first task is to collect 5 Reese's chocolates.")
     input("Type anything to get started! ")
     return player_name
 
 
 def make_character(player_name):
-    player = {'name': player_name, 'level': 1, 'maturity': 0, 'self-esteem': 10, 'position': [3, 1], 'location': 'bedroom', 'flowers': 0}
+
+    player = {'name': player_name, 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
     return player
 
 
-def check_location_map(player):
+def give_location_description(player):
     areas = {
-            'bedroom': {
+            'tech_hub': {
                     'rows': 8,
                     'columns': 7,
                     'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)],
-                    'door': (6, 7)
+                    'Chris': None
             },
-            'path': {
+            'student_lounge': {
                     'rows': 10,
                     'columns': 7,
                     'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)],
-                    'door': (4, 9)
+                    'Chris': None
             },
-            'another_room': {
+            'room_645': {
                     'rows': 4,
                     'columns': 12,
                     'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3)],
-                    'door': (1, 2)
+                    'Chris': (6, 1)
             }
     }
     for area, area_description in areas.items():
@@ -62,20 +63,20 @@ def add_map_boundaries(area_description):
                 area_description["obstacles"].append(tuple(wall))
 
 
-
-def print_location_map(player, area_description, flower_coordinates):
+def print_map(player, area_description, chocolate_coordinates):
 
     for row in range(area_description["rows"]):
         for column in range(area_description["columns"]):
             coordinate = [column, row]
+
             if coordinate == player['position']:
                 print('*', end="")
             elif tuple(coordinate) in area_description["obstacles"]:
                 print('#', end="")
-            elif tuple(coordinate) in area_description["door"]:
-                print('X', end="")
-            elif tuple(coordinate) in flower_coordinates:
+            elif tuple(coordinate) in chocolate_coordinates:
                 print('!', end="")
+            elif tuple(coordinate) == area_description["Chris"]:
+                print('C', end="")
             else:
                 print(' ', end="")
         print()
@@ -83,24 +84,16 @@ def print_location_map(player, area_description, flower_coordinates):
     print()
 
 
-#     # north_wall = coordinate[0] == 0
-#     # west_wall = coordinate[1] == 0
-#     # east_wall = coordinate[0] == columns - 1
-#     # south_wall = coordinate[1] == rows - 1
-#     # if north_wall or south_wall:
-#     #     print('-', end='')
-#     # elif east_wall or west_wall:
-#     #     print('|', end='')
-
 # Criteria 7
 
-
-def get_user_choice():
+def get_user_choice(player):
     while True:
-        direction = input('[1] North, [2] South, [3] East, [4] West\nPlease enter the number that corresponds to/'
+        direction = input('[1] North, [2] South, [3] East, [4] West, [S] Stats\nPlease enter the number that corresponds to/'
                         'the direction you want to go: ')
         if direction in ['1', '2', '3', '4']:
             return direction
+        elif direction in ['S', 's']:
+            print_stats(player)
         else:
             print("Invalid direction. ")
 
@@ -136,7 +129,7 @@ def move_character(player, direction):
     return player
 
 
-def run_into_relatives():
+def quiz_probability():
     chance_of_running_into_relatives = random.randint(1, 5)
     if chance_of_running_into_relatives == 1:
         return True
@@ -144,101 +137,149 @@ def run_into_relatives():
         return False
 
 
-def auntie_encounter(player):
-    aunt_attack_moves = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2, "'Have you recently gained weight?'": 3, "'My son is sooo successful blah blah..., what are you doing these days?'": 4}
+def make_quiz_questions():
+    surprise_questions = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2,
+                         "'Have you recently gained weight?'": 3,
+                         "'My son is sooo successful blah blah..., what are you doing these days?'": 4}
+    return surprise_questions
+
+
+def surprise_pop_quiz(player, surprise_questions):
     print("You ran into your aunt!")
-    random_attack = random.choice(list(aunt_attack_moves.keys()))
+    random_attack = random.choice(list(surprise_questions.keys()))
     print(f"Your aunt attacks with: {random_attack}")
     dodge = input("Guess the right number (1 to 4) to run away: ")
     correct_number = random.randint(1, 4)
     if dodge == correct_number:
-        player['maturity'] += 25
-        print(f"You brush it off and your maturity is now {player['maturity']}!")
+        player['intelligence'] += 25
+        print(f"You brush it off and your intelligence is now {player['intelligence']}!")
     else:
-        player['self-esteem'] -= aunt_attack_moves.get(random_attack)
-        print(f'Your self-esteem takes a hit! -{aunt_attack_moves.get(random_attack)} points. Current HP is {player['self-esteem']}')
+        player['HP'] -= surprise_questions.get(random_attack)
+        if player['HP'] > 0:
+            print(f'Your HP takes a hit! -{surprise_questions.get(random_attack)} points. Current HP is {player['HP']}\n')
+
+# player, area_description
+# chocolate_coordinates = [(2, 0), (6, 6), (0, 1), (3, 2), (3, 0)]
 
 
-def generate_flowers(player, area_description):
+def generate_chocolate(player, area_description):
     list_of_empty_coordinates = []
     for x_coordinate in range(area_description["columns"]):
         for y_coordinate in range(area_description["rows"]):
-            if (x_coordinate, y_coordinate) not in area_description["obstacles"] and (x_coordinate, y_coordinate) != (player['position']):
+            if (x_coordinate, y_coordinate) not in area_description["obstacles"] and (x_coordinate, y_coordinate) != tuple(player['position']):
                 list_of_empty_coordinates.append((x_coordinate, y_coordinate))
-    flower_coordinates = random.sample(list_of_empty_coordinates, 5)
-    return flower_coordinates
+    chocolate_coordinates = random.sample(list_of_empty_coordinates, 5)
+    return chocolate_coordinates
 
 
-def level_up(player, aunt_attack_moves):
-    if player["maturity"] >= 500:
-        print("You leveled up to Level 3!")
-        player["level"] += 1
-        player["self-esteem"] += 30
-        for each_attack_move in aunt_attack_moves:
-            aunt_attack_moves[each_attack_move] *= 4
-        unlock_map()
-
-    elif player["maturity"] >= 250:
-        print("You leveled up to Level 2!")
-        player["level"] += 1
-        player["self-esteem"] += 20
-        for each_attack_move in aunt_attack_moves:
-            aunt_attack_moves[each_attack_move] *= 3
-        unlock_map()
+def level_up_to_3(player, surprise_questions):
+    print("YOU LEVELED UP TO LEVEL 3!\nIt's time...be careful, there are some HARD pop quizzes waiting to ambush you here... find Chris")
+    player["level"] += 1
+    player["HP"] += 20
+    player["location"] = "room_645"
+    player["position"] = [1, 2]
+    chocolate_coordinates = []
+    for each_attack_move in surprise_questions:
+        surprise_questions[each_attack_move] *= 2
+    return chocolate_coordinates
 
 
-    elif player["maturity"] >= 100:
-        print("You leveled up to Level 1!")
-        player["level"] += 1
-        player["self-esteem"] += 10
-        for each_attack_move in aunt_attack_moves:
-            aunt_attack_moves[each_attack_move] *= 2
-        unlock_map()
+def print_stats(player):
+    print(player)
+
+
+def level_up_to_2(player, surprise_questions):
+    print("YOU LEVELED UP TO LEVEL 2!")
+    player["level"] += 1
+    player["HP"] += 10
+    player["location"] = "student_lounge"
+    player["position"] = [3, 1]
+    for each_attack_move in surprise_questions:
+        surprise_questions[each_attack_move] *= 2
+    area_description = give_location_description(player)
+    add_map_boundaries(area_description)
+    chocolate_coordinates = generate_chocolate(player, area_description)
+    return chocolate_coordinates
+
+
+# player, chocolate_coordinates
+def pick_up_chocolate(player, chocolate_coordinates):
+    if tuple(player["position"]) in chocolate_coordinates:
+        player["chocolate"] += 1
+        print(f"\nYou picked up a Reese's chocholate! You now have {player["chocolate"]}.\n")
+        chocolate_coordinates.remove(tuple(player["position"]))
+        return chocolate_coordinates
 
 
 def unlock_map():
     pass
 
 
-# Issues
+def is_alive(player):
+    if player["HP"] > 0:
+        return True
+    else:
+        print(f'Your HP has hit rock bottom. GAME OVER!')
+        return False
 
-def change_location(player):
-    if player['position'] == [5, 6] and player['location'] == 'bedroom':
-        player['location'] = 'path'
-        player['position'] = [3, 1]
-    if player['position'] == [3, 1] and player['location'] == 'path':
-        player['location'] = 'bedroom'
-        player['position'] = [5, 6]
-    if player['position'] == [4, 9] and player['location'] == 'path':
-        player['location'] = 'another_room'
-        player['position'] = [1, 2]
-    if player['position'] == [1, 2] and player['location'] == 'another_room':
-        player['location'] = 'path'
+def check_officially_dating():
+    pass
 
-    return player
 
+def check_level(player, surprise_questions):
+    if player['chocolate'] == 5 and player['level'] == 1:
+        chocolate_coordinates = level_up_to_2(player, surprise_questions)
+        return chocolate_coordinates
+
+    elif player['chocolate'] == 10 and player['level'] == 2:
+        chocolate_coordinates = level_up_to_3(player, surprise_questions)
+        return chocolate_coordinates
+
+
+
+
+
+# "Who is feeling brave today?"
+# "You made slight eye contact!"
 
 
 def game():
     player_name = welcome_message()
     character = make_character(player_name)
+    current_location = give_location_description(character)
+    add_map_boundaries(current_location)
+    chocolate_coordinates = generate_chocolate(character, current_location)
+    attack_moves = make_quiz_questions()
+    print_map(character, current_location, chocolate_coordinates)
     officially_dating = False
-    while not officially_dating:
-        current_location = check_location_map(character)
-        add_map_boundaries(current_location)
-        flower_coordinates = generate_flowers(character, current_location)
-        print_location_map(character, current_location, flower_coordinates)
-        direction = get_user_choice()
+    while is_alive(character) and not officially_dating:
+        direction = get_user_choice(character)
         valid_move = validate_move(character, current_location, direction)
         if valid_move:
             move_character(character, direction)
-            character = change_location(character)
-            print_location_map(character, current_location, flower_coordinates)
-            if run_into_relatives():
-                auntie_encounter(character)
+            pick_up_chocolate(character, chocolate_coordinates)
+            # if quiz_probability():
+                # surprise_pop_quiz(character, attack_moves)
+            # chocolate_coordinates = check_level(character, attack_moves, current_location)
+            if character['chocolate'] == 5 and character['level'] == 1:
+                chocolate_coordinates = check_level(character, attack_moves)
+
+            elif character['chocolate'] == 10 and character['level'] == 2:
+                chocolate_coordinates = check_level(character, attack_moves)
+            current_location = give_location_description(character)
+            add_map_boundaries(current_location)
+            print_map(character, current_location, chocolate_coordinates)
+            if character["position"] == [6, 1] and character["location"] == "room_645":
+                officially_dating = chris_final_boss(character)
+
+            # if is_alive(character):
+            #     officially_dating = check_officially_dating()
+            #     if officially_dating:
+            #         print("CONGRATULATIONS. YOU GOT ARE COUPLED!")
         else:
             print("\nYou can't go there!")
-    print("Congratulations!")
+
+
 
 def main():
     game()

@@ -88,6 +88,23 @@ def give_location_description(player):
 
 
 def add_map_boundaries(area_description):
+    """
+    Add outside boundaries to the specified map.
+
+    :param area_description: a dictionary with information on the character's current location
+    :precondition: area_description is provided in the correct format
+    :postcondition: adds the boundary coordinates of the map to the map's list of obstacle coordinates
+    >>> location_description = {
+        'rows': 8,
+        'columns': 7,
+        'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5),
+                      (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)],
+        'Chris': None
+    }
+    >>> add_map_boundaries(location_description)
+    # ADD
+
+    """
     y_axis = area_description["rows"]
     x_axis = area_description["columns"]
 
@@ -105,6 +122,7 @@ def add_map_boundaries(area_description):
                 continue
             else:
                 area_description["obstacles"].append(tuple(wall))
+
 
 
 def print_map(player, area_description, chocolate_coordinates):

@@ -133,6 +133,7 @@ def generate_chocolate(player, area_description):
     :param player: a dictionary representing a character created for this game
     :param area_description: a dictionary with information on the character's current location
     :precondition: player and area_description are provided in the correct format
+    :precondition: character has greater than 0 HP
     :return: a list of tuple representing the coordinates of chocolates on the map
     """
 
@@ -153,6 +154,7 @@ def print_map(player, area_description, chocolate_coordinates):
     :param area_description: a dictionary with information on the character's current location
     :param chocolate_coordinates: a list of tuples representing the coordinates of chocolates in the game
     :precondition: player, area_description, and chocolate_coordinates are in the correct format
+    :precondition: character has greater than 0 HP
     # ADD
     """
     for row in range(area_description["rows"]):
@@ -173,22 +175,28 @@ def print_map(player, area_description, chocolate_coordinates):
     print(f'You are at position {player["position"]}\n')
 
 
-
-# Criteria 7
-
 def get_user_choice(player):
+    """
+    Returns the direction that the user choose.
+
+    :precondition: user input must be a number associated with the direction (ie: not "1" and not "North")
+    :precondition: character has greater than 0 HP
+    :postcondition: returns the direction after acquiring a correct input from the user
+    :return: a string representing the direction chosen by the user
+    """
     while True:
         direction = input('[1] North, [2] South, [3] East, [4] West, [S] Stats\nPlease enter the number that corresponds to/'
                         'the direction you want to go: ')
         if direction in ['1', '2', '3', '4']:
             return direction
-        elif direction in ['S', 's']:
-            print_stats(player)
+        # elif direction in ['S', 's']:
+        #     print_stats(player)
         else:
             print("Invalid direction. ")
 
 
 def validate_move(player, area_description, direction):
+
     new_coordinate = player["position"].copy()
     if direction == "1":
         new_coordinate[1] -= 1
@@ -198,7 +206,6 @@ def validate_move(player, area_description, direction):
         new_coordinate[0] += 1
     elif direction == "4":
         new_coordinate[0] -= 1
-    # else?
 
     if tuple(new_coordinate) in area_description["obstacles"]:
         return False

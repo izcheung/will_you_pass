@@ -124,9 +124,25 @@ def add_map_boundaries(area_description):
                 area_description["obstacles"].append(tuple(wall))
 
 
+def generate_chocolate(player, area_description):
+    list_of_empty_coordinates = []
+    for x_coordinate in range(area_description["columns"]):
+        for y_coordinate in range(area_description["rows"]):
+            if (x_coordinate, y_coordinate) not in area_description["obstacles"] and (x_coordinate, y_coordinate) != tuple(player['position']):
+                list_of_empty_coordinates.append((x_coordinate, y_coordinate))
+    chocolate_coordinates = random.sample(list_of_empty_coordinates, 5)
+    return chocolate_coordinates
+
 
 def print_map(player, area_description, chocolate_coordinates):
+    """
+    Prints a visual representation of the location's map.
 
+    :param player: a dictionary representing a character created for this game
+    :param area_description: a dictionary with information on the character's current location
+    :param chocolate_coordinates: a list of tuples
+    :precondition: player, area_description, and chocolate_coordinates are in the correct format
+    """
     for row in range(area_description["rows"]):
         for column in range(area_description["columns"]):
             coordinate = [column, row]
@@ -142,8 +158,8 @@ def print_map(player, area_description, chocolate_coordinates):
             else:
                 print(' ', end="")
         print()
-    print(f'You are at position {player["position"]}')
-    print()
+    print(f'You are at position {player["position"]}\n')
+
 
 
 # Criteria 7
@@ -224,14 +240,7 @@ def surprise_pop_quiz(player, surprise_questions):
 # chocolate_coordinates = [(2, 0), (6, 6), (0, 1), (3, 2), (3, 0)]
 
 
-def generate_chocolate(player, area_description):
-    list_of_empty_coordinates = []
-    for x_coordinate in range(area_description["columns"]):
-        for y_coordinate in range(area_description["rows"]):
-            if (x_coordinate, y_coordinate) not in area_description["obstacles"] and (x_coordinate, y_coordinate) != tuple(player['position']):
-                list_of_empty_coordinates.append((x_coordinate, y_coordinate))
-    chocolate_coordinates = random.sample(list_of_empty_coordinates, 5)
-    return chocolate_coordinates
+
 
 
 def level_up_to_3(player, surprise_questions):

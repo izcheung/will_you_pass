@@ -196,6 +196,18 @@ def get_user_choice(player):
 
 
 def validate_move(player, area_description, direction):
+    """
+    Checks if a move in the specified direction is valid for the player.
+
+    :param player: a dictionary representing a character created for this game
+    :param area_description: a dictionary with information on the character's current location
+    :param direction: a string representing the direction chosen by the user
+    :precondition: the player, area_description, and direction are provided in the correct format
+    :precondition: character has greater than 0 HP
+    :postcondition: correctly check whether the move will result in a valid coordinate (within bounds and no obstacle)
+    :return: a boolean - True if the move in the specified direction is valid and False otherwise
+    #ADD
+    """
 
     new_coordinate = player["position"].copy()
     if direction == "1":

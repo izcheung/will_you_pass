@@ -6,8 +6,8 @@ def welcome_message():
     """
     Customizes a welcome message for the player.
 
-    :postcondition: uses the player's name within the welcome message
-    :return: the player's inputted name as a string
+    :postcondition: uses the name of the player's character within the welcome message
+    :return: the name of the player's character as a string
     """
 
     player_name = input("Please enter your character name: ")
@@ -18,12 +18,31 @@ def welcome_message():
 
 
 def make_character(player_name):
+    """
+    Creates a new character with the specified player name and default attributes.
 
-    player = {'name': player_name, 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
+    :param player_name: a string representing the name of the player's character
+    :postcondition: creates a dictionary with the correct default attributes
+    :return: a dictionary representing the player's character with the following attributes:
+          - 'name': player's character name
+          - 'level': initial level set at 1
+          - 'intelligence': initial intelligence set to 0
+          - 'HP': initial health set to 10
+          - 'position': initial position represented as [row, column]
+          - 'location': initial location set to 'tech_hub'
+          - 'chocolate': initial number of chocolates set to 0
+
+    >>> make_character('Irene')
+    {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', \
+    'chocolate': 0}
+    """
+    player = {'name': player_name, 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', \
+              'chocolate': 0}
     return player
 
 
 def give_location_description(player):
+
     areas = {
             'tech_hub': {
                     'rows': 8,

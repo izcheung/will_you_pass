@@ -237,6 +237,15 @@ def check_level(player, surprise_questions):
 
 
 
+def number_of_final_exam_attempts(player):
+    if player['intelligence'] >= 1000:
+        player['HP'] = 3
+    elif player['intelligence'] >= 500:
+        player['HP'] = 2
+    else:
+        player['HP'] = 1
+
+
 def final_exam(player):
     number_of_final_exam_attempts(player)
     print(f"\n\nWelcome to COMP1510 mWAHAHAH, it is I, Chris! Can you pass this final test? Based on your points, you have {player['HP']} tries.")

@@ -344,7 +344,7 @@ def level_up_to_2(player, surprise_questions):
     :param player: a dictionary representing the character created for this game
     :param surprise_questions: a dictionary of surprise pop quiz questions
     :precondition: player and surprise_questions are provided in the correct format
-    :preconditiion: player must be at level 1 and have 5 chocolates
+    :precondition: player must be at level 1 and have 5 chocolates
     :precondition: character has greater than 0 HP
     :postcondition: increase player level by 1, HP by 10
     :postcondition: set location to student_lounge with a list of chocolate coordinates tuples and position to [3, 1]
@@ -403,6 +403,25 @@ def is_alive(player):
 
 
 def check_level(player, surprise_questions):
+    """
+    Checks the player's chocolate count and level to determine if the character meets the criteria for a level-up.
+
+    :param player: a dictionary representing the character created for this game
+    :param surprise_questions: a dictionary of surprise pop quiz questions
+    :precondition: player and surprise_questions are provided in the correct format
+    :precondition: character has greater than 0 HP
+    :postcondition: triggers the level up event once character meets the criterias
+    :postcondition: updates the flower coordinates for the new map
+    :return: a new, randomly generated list of chocolate coordinates
+
+    >>> player_data = {'name': 'Irene', 'level': 1, 'intelligence': 20, 'HP': 30, 'position': [3, 1],
+    ...                'location': 'tech_hub', 'chocolate': 5}
+    >>> surprise_questions_data = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2,
+    ...                              "'Have you recently gained weight?'": 3,
+    ...                              "'My son is sooo successful blah blah..., what are you doing these days?'": 4}
+    >>> check_level(player_data, surprise_questions_data)
+    """
+
     if player['chocolate'] == 5 and player['level'] == 1:
         chocolate_coordinates = level_up_to_2(player, surprise_questions)
         return chocolate_coordinates
@@ -412,8 +431,8 @@ def check_level(player, surprise_questions):
         return chocolate_coordinates
 
 
+def update_HP_based_on_intelligence_for_final_exam(player):
 
-def number_of_final_exam_attempts(player):
     if player['intelligence'] >= 1000:
         player['HP'] = 3
     elif player['intelligence'] >= 500:
@@ -423,7 +442,7 @@ def number_of_final_exam_attempts(player):
 
 
 def final_exam(player):
-    number_of_final_exam_attempts(player)
+    update_HP_based_on_intelligence_for_final_exam(player)
     print(f"\n\nWelcome to COMP1510 mWAHAHAH, it is I, Chris! Can you pass this final test? Based on your points, you have {player['HP']} tries.")
     correct_answers = 0
     questions = {

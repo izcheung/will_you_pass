@@ -237,6 +237,29 @@ def check_level(player, surprise_questions):
 
 
 
+def final_exam(player):
+    number_of_final_exam_attempts(player)
+    print(f"\n\nWelcome to COMP1510 mWAHAHAH, it is I, Chris! Can you pass this final test? Based on your points, you have {player['HP']} tries.")
+    correct_answers = 0
+    questions = {
+        "You made slight eye contact! What is my favourite chocolate?\n[1]KitKat\n[2]Snickers\n[3]Reese's chocolate\n[4]Toblerone\n": '3',
+        "Does pineapple belong on my pizza?\n[1]It's not my first pick\n[2]Pineapple on pizza is *chef's kiss*\n[3]Food sounds good to me\n[4]That's an abomination!\n": '4',
+        "Are you going to pass my course?\n[1]Yes\n[2]No\n": "1"}
+
+    for question, answer in questions.items():
+        if is_alive(player) and correct_answers < 3:
+            question_number = input(question)
+            if question_number == answer:
+                print("I see that you pay attention in class. Very good! Everyone give a round of applause!\n")
+                correct_answers += 1
+            else:
+                player['HP'] -= 1
+                print("Oof, not quite. But nice try.")
+    if correct_answers == 3:
+        officially_dating = True
+        return officially_dating
+    else:
+        print("You FAIL")
 
 
 # "Who is feeling brave today?"
@@ -270,7 +293,7 @@ def game():
             add_map_boundaries(current_location)
             print_map(character, current_location, chocolate_coordinates)
             if character["position"] == [6, 1] and character["location"] == "room_645":
-                officially_dating = chris_final_boss(character)
+                officially_dating = final_exam(character)
 
             # if is_alive(character):
             #     officially_dating = check_officially_dating()

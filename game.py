@@ -311,16 +311,29 @@ def surprise_pop_quiz(player, surprise_questions):
             print(f'Your HP takes a hit! -{surprise_questions.get(random_attack)} points. Current HP is {player['HP']}\n')
 
 
-
 def level_up_to_3(player, surprise_questions):
+    """
+    Sets up the game for when character advances to level 3.
+
+    :param player: a dictionary representing the character created for this game
+    :param surprise_questions: a dictionary of surprise pop quiz questions
+    :precondition: player and surprise_questions are provided in the correct format
+    :preconditiion: player must be at level 2 and have 10 chocolates
+    :precondition: character has greater than 0 HP
+    :postcondition: increase player level by 1, HP by 20
+    :postcondition: set location to room 645 with no chocolate coordinates and position to [1, 2]
+    :postcondition: double the damage for each question
+    :return: an empty list of chocolate coordinates
+    """
+
     print("YOU LEVELED UP TO LEVEL 3!\nIt's time...be careful, there are some HARD pop quizzes waiting to ambush you here... find Chris")
     player["level"] += 1
     player["HP"] += 20
     player["location"] = "room_645"
     player["position"] = [1, 2]
     chocolate_coordinates = []
-    for each_attack_move in surprise_questions:
-        surprise_questions[each_attack_move] *= 2
+    for each_question in surprise_questions:
+        surprise_questions[each_question] *= 2
     return chocolate_coordinates
 
 
@@ -334,8 +347,8 @@ def level_up_to_2(player, surprise_questions):
     player["HP"] += 10
     player["location"] = "student_lounge"
     player["position"] = [3, 1]
-    for each_attack_move in surprise_questions:
-        surprise_questions[each_attack_move] *= 2
+    for each_question in surprise_questions:
+        surprise_questions[each_question] *= 2
     area_description = give_location_description(player)
     add_map_boundaries(area_description)
     chocolate_coordinates = generate_chocolate(player, area_description)
@@ -351,19 +364,12 @@ def pick_up_chocolate(player, chocolate_coordinates):
         return chocolate_coordinates
 
 
-def unlock_map():
-    pass
-
-
 def is_alive(player):
     if player["HP"] > 0:
         return True
     else:
         print(f'Your HP has hit rock bottom. GAME OVER!')
         return False
-
-def check_officially_dating():
-    pass
 
 
 def check_level(player, surprise_questions):

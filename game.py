@@ -271,7 +271,7 @@ def make_quiz_questions():
 
     :precondition: character has greater than 0 HP
     :postcondition: correctly creates a dictionary of questions as keys, and the correct answer as the value
-    :return: a dictionary of surprise pop quiz questions.
+    :return: a dictionary of surprise pop quiz questions
     """
 
     surprise_questions = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2,
@@ -281,6 +281,22 @@ def make_quiz_questions():
 
 
 def surprise_pop_quiz(player, surprise_questions):
+    """
+    Generates a surprise pop quiz where the user must guess a number between 1 and 4 inclusive.
+
+    If user makes an incorrect guess, HP will be deducted by 1. If the guess is correct, there will be no deduction \
+    and player will gain 25 intelligence points.
+
+    :param player: a dictionary representing the character created for this game
+    :param surprise_questions: a dictionary of surprise pop quiz questions
+    :precondition: player and surprise_questions are provided in the correct format
+    :precondition: character has greater than 0 HP
+    :postcondition: correctly check whether the user guessed the right integer between 1 and 4 inclusive
+    :postcondition: one HP point is deduced for each wrong answer and 25 intelligence points are earned for each right \
+    answer
+    :return: a boolean - True if the player guesses the right answer and False otherwise
+    """
+
     print("You ran into your aunt!")
     random_attack = random.choice(list(surprise_questions.keys()))
     print(f"Your aunt attacks with: {random_attack}")
@@ -293,11 +309,6 @@ def surprise_pop_quiz(player, surprise_questions):
         player['HP'] -= surprise_questions.get(random_attack)
         if player['HP'] > 0:
             print(f'Your HP takes a hit! -{surprise_questions.get(random_attack)} points. Current HP is {player['HP']}\n')
-
-# player, area_description
-# chocolate_coordinates = [(2, 0), (6, 6), (0, 1), (3, 2), (3, 0)]
-
-
 
 
 

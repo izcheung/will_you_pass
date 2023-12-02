@@ -3,6 +3,12 @@ import random
 
 
 def welcome_message():
+    """
+    Customizes a welcome message for the player.
+
+    :postcondition: uses the player's name within the welcome message
+    :return: the player's inputted name as a string
+    """
 
     player_name = input("Please enter your character name: ")
     print(

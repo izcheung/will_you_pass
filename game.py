@@ -1,6 +1,9 @@
+"""
+Irene Cheung
+A01349998
+"""
 
 import random
-
 
 def welcome_message():
     """
@@ -9,10 +12,13 @@ def welcome_message():
     :postcondition: uses the name of the player's character within the welcome message
     :return: the name of the player's character as a string
     """
-    player_name = input("Please enter your character name: ")
+    player_name = ""
+    while len(player_name) == 0:
+        player_name = input("Please enter your character name: ")
     print(
-        f"Welcome to Pass COMP1510 {player_name}! You are a hopeless student who achieved a final grade of 49.9% in COMP1510. Out of desperation, you made a devious plan to bribe Chris.  Your first task is to collect 5 Reese's chocolates.")
-    input("Type anything to get started! ")
+        f"Welcome to 'Pass COMP1510' {player_name}! You are a hopeless student with an average of 49.9% in COMP1510. "
+        f"Out of desperation, you make a devious plan to bribe Chris with his favourite chocolates to pass his course. "
+        f"Your first task is to collect 5 Reese's chocolates.")
     return player_name
 
 
@@ -34,6 +40,10 @@ def make_character(player_name):
     >>> make_character('Irene')
     {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', \
     'chocolate': 0}
+
+    >>> make_character('John')
+    {'name': 'John', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', \
+    'chocolate': 0}
     """
     player = {'name': player_name, 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub',
               'chocolate': 0}
@@ -46,10 +56,10 @@ def give_location_description(player):
 
     :param player: a dictionary representing a character created for this game
     :precondition: the player is provided in the correct format
+    :precondition: player location must be one of 'tech_hub', 'student_lounge', or 'room_645'
     :postcondition: correctly return the dictionary that matches the character's current location
     :return: a dictionary with information on the character's current location
-    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1],
-    'location': 'tech_hub', 'chocolate': 0}
+    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
     >>> give_location_description(character)
     {
         'rows': 8,
@@ -94,16 +104,17 @@ def add_map_boundaries(area_description):
     :param area_description: a dictionary with information on the character's current location
     :precondition: area_description is provided in the correct format
     :postcondition: adds the boundary coordinates of the map to the map's list of obstacle coordinates
-    >>> location_description = {
-        'rows': 8,
-        'columns': 7,
-        'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5),
-                      (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)],
-        'Chris': None
-    }
-    >>> add_map_boundaries(location_description)
-    # ADD
+    >>> description_of_area = {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)], 'Chris': None}
+    >>> add_map_boundaries(description_of_area)
+    >>> updated_obstacles = description_of_area["obstacles"]
+    >>> updated_obstacles == [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)]
+    True
 
+    >>> description_of_area = {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None}
+    >>> add_map_boundaries(description_of_area)
+    >>> updated_obstacles = description_of_area["obstacles"]
+    >>> updated_obstacles == [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9), (6, 9), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (6, 5), (6, 6)]
+    True
     """
     y_axis = area_description["rows"]
     x_axis = area_description["columns"]
@@ -132,9 +143,12 @@ def generate_chocolate(player, area_description):
 
     :param player: a dictionary representing a character created for this game
     :param area_description: a dictionary with information on the character's current location
+    :precondition: area_description must be one of tech_hub, student_lounge, or room_645
     :precondition: player and area_description are provided in the correct format
     :precondition: character has greater than 0 HP
-    :return: a list of tuple representing the coordinates of chocolates on the map
+    :precondition: function must be called after the map boundaries are added to the list of obstacles to ensure the chocolate coordinates are within bounds
+    :postcondition: randomly generates a chocolate coordinate within the board, not in an obstacle or player coordinate, and not repeated
+    :return: a list of five tuples representing the coordinates of chocolates on the map
     """
 
     list_of_empty_coordinates = []
@@ -185,12 +199,10 @@ def get_user_choice(player):
     :return: a string representing the direction chosen by the user
     """
     while True:
-        direction = input('[1] North, [2] South, [3] East, [4] West, [S] Stats\nPlease enter the number that corresponds to/'
+        direction = input('[1] North, [2] South, [3] East, [4] West\nPlease enter the number that corresponds to/'
                         'the direction you want to go: ')
         if direction in ['1', '2', '3', '4']:
             return direction
-        # elif direction in ['S', 's']:
-        #     print_stats(player)
         else:
             print("Invalid direction. ")
 
@@ -267,16 +279,16 @@ def quiz_probability():
 
 def make_quiz_questions():
     """
-    Creates a dictionary of surprise quiz questions.
+    Creates a dictionary of surprise quiz questions as the key and the damage points as the value.
 
     :precondition: character has greater than 0 HP
     :postcondition: correctly creates a dictionary of questions as keys, and the correct answer as the value
     :return: a dictionary of surprise pop quiz questions
     """
 
-    surprise_questions = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2,
-                         "'Have you recently gained weight?'": 3,
-                         "'My son is sooo successful blah blah..., what are you doing these days?'": 4}
+    surprise_questions = {"Is the dress blue/black or white/gold?": 2, "Are hot dogs sandwiches?": 4,
+                         "Why are pizza boxes square but pizzas are circular?": 3,
+                         "Is the opposite of opposite the same or opposite": 2}
     return surprise_questions
 
 
@@ -297,14 +309,14 @@ def surprise_pop_quiz(player, surprise_questions):
     :return: a boolean - True if the player guesses the right answer and False otherwise
     """
 
-    print("You ran into your aunt!")
+    print("POP QUIZ!!")
     random_attack = random.choice(list(surprise_questions.keys()))
-    print(f"Your aunt attacks with: {random_attack}")
-    dodge = input("Guess the right number (1 to 4) to run away: ")
+    print(f"You made slight eye contact! {random_attack}")
+    dodge = input("Guess the right answer [1 to 4]: ")
     correct_number = random.randint(1, 4)
     if dodge == correct_number:
         player['intelligence'] += 25
-        print(f"You brush it off and your intelligence is now {player['intelligence']}!")
+        print(f"That is correct! Your intelligence is now {player['intelligence']}!")
     else:
         player['HP'] -= surprise_questions.get(random_attack)
         if player['HP'] > 0:
@@ -326,9 +338,11 @@ def level_up_to_3(player, surprise_questions):
     :return: an empty list of chocolate coordinates
     """
 
-    print("YOU LEVELED UP TO LEVEL 3!\nIt's time...be careful, there are some HARD pop quizzes waiting to ambush you here... find Chris")
+    print("YOU LEVELED UP TO LEVEL 3!\nBe careful, the pop quizzes here can DESTROY your self-esteem. Your last task is"
+          " to find Chris.")
     player["level"] += 1
-    player["HP"] += 20
+    player["HP"] += 10
+    player["intelligence"] += 200
     player["location"] = "room_645"
     player["position"] = [1, 2]
     chocolate_coordinates = []
@@ -354,6 +368,7 @@ def level_up_to_2(player, surprise_questions):
     print("YOU LEVELED UP TO LEVEL 2!")
     player["level"] += 1
     player["HP"] += 10
+    player["intelligence"] += 100
     player["location"] = "student_lounge"
     player["position"] = [3, 1]
     for each_question in surprise_questions:
@@ -362,10 +377,6 @@ def level_up_to_2(player, surprise_questions):
     add_map_boundaries(area_description)
     chocolate_coordinates = generate_chocolate(player, area_description)
     return chocolate_coordinates
-
-
-def print_stats(player):
-    print(player)
 
 
 def pick_up_chocolate(player, chocolate_coordinates):
@@ -398,7 +409,7 @@ def is_alive(player):
     if player["HP"] > 0:
         return True
     else:
-        print(f'Your HP has hit rock bottom. GAME OVER!')
+        print("You wake up from a nightmare")
         return False
 
 
@@ -413,13 +424,6 @@ def check_level(player, surprise_questions):
     :postcondition: triggers the level up event once character meets the criterias
     :postcondition: updates the flower coordinates for the new map
     :return: a new, randomly generated list of chocolate coordinates
-
-    >>> player_data = {'name': 'Irene', 'level': 1, 'intelligence': 20, 'HP': 30, 'position': [3, 1],
-    ...                'location': 'tech_hub', 'chocolate': 5}
-    >>> surprise_questions_data = {"'When are you getting married?'": 1, "*pinching your cheeks*": 2,
-    ...                              "'Have you recently gained weight?'": 3,
-    ...                              "'My son is sooo successful blah blah..., what are you doing these days?'": 4}
-    >>> check_level(player_data, surprise_questions_data)
     """
 
     if player['chocolate'] == 5 and player['level'] == 1:
@@ -451,32 +455,34 @@ def update_HP_based_on_intelligence_for_final_exam(player):
 
 
 def final_exam(player):
+    """
+
+    :param player:
+    :return:
+    """
     update_HP_based_on_intelligence_for_final_exam(player)
-    print(f"\n\nWelcome to COMP1510 mWAHAHAH, it is I, Chris! Can you pass this final test? Based on your points, you have {player['HP']} tries.")
-    correct_answers = 0
+    print(f"\n\nWelcome to COMP1510 Mwahaha, it is I, Chris! Will you pass this final test? Based on your points, you have {player['HP']} tries.")
+
+
     questions = {
         "You made slight eye contact! What is my favourite chocolate?\n[1]KitKat\n[2]Snickers\n[3]Reese's chocolate\n[4]Toblerone\n": '3',
         "Does pineapple belong on my pizza?\n[1]It's not my first pick\n[2]Pineapple on pizza is *chef's kiss*\n[3]Food sounds good to me\n[4]That's an abomination!\n": '4',
-        "Are you going to pass my course?\n[1]Yes\n[2]No\n": "1"}
+        "Are you going to pass my course?\n[1]Yes\n[2]No\n[3]I forgot to mention I have Reese's chocolates!\n[4]PLEASE\n": "3"}
+
+    correct_answer_count = 0
 
     for question, answer in questions.items():
-        if is_alive(player) and correct_answers < 3:
-            question_number = input(question)
-            if question_number == answer:
-                print("I see that you pay attention in class. Very good! Everyone give a round of applause!\n")
-                correct_answers += 1
+        if is_alive(player):
+            user_answer = input(question)
+            if user_answer == answer:
+                print("I see that you pay attention in class. Very good!\n")
+                correct_answer_count += 1
+                if correct_answer_count == 3:
+                    print("Congratulations!")
+                    return True
             else:
                 player['HP'] -= 1
                 print("Oof, not quite. But nice try.")
-    if correct_answers == 3:
-        officially_dating = True
-        return officially_dating
-    else:
-        print("You FAIL")
-
-
-# "Who is feeling brave today?"
-# "You made slight eye contact!"
 
 
 def game():
@@ -487,38 +493,46 @@ def game():
     chocolate_coordinates = generate_chocolate(character, current_location)
     attack_moves = make_quiz_questions()
     print_map(character, current_location, chocolate_coordinates)
-    officially_dating = False
-    while is_alive(character) and not officially_dating:
+    passed_comp1510 = False
+    while is_alive(character) and not passed_comp1510:
         direction = get_user_choice(character)
         valid_move = validate_move(character, current_location, direction)
         if valid_move:
             move_character(character, direction)
             pick_up_chocolate(character, chocolate_coordinates)
-            # if quiz_probability():
-                # surprise_pop_quiz(character, attack_moves)
-            # chocolate_coordinates = check_level(character, attack_moves, current_location)
+            if quiz_probability():
+                surprise_pop_quiz(character, attack_moves)
             if character['chocolate'] == 5 and character['level'] == 1:
                 chocolate_coordinates = check_level(character, attack_moves)
-
             elif character['chocolate'] == 10 and character['level'] == 2:
                 chocolate_coordinates = check_level(character, attack_moves)
             current_location = give_location_description(character)
             add_map_boundaries(current_location)
             print_map(character, current_location, chocolate_coordinates)
             if character["position"] == [6, 1] and character["location"] == "room_645":
-                officially_dating = final_exam(character)
-
-            # if is_alive(character):
-            #     officially_dating = check_officially_dating()
-            #     if officially_dating:
-            #         print("CONGRATULATIONS. YOU GOT ARE COUPLED!")
+                passed_comp1510 = final_exam(character)
         else:
             print("\nYou can't go there!")
 
 
-
 def main():
+    """
+    Drives the program.
+    """
     game()
 
 
-main()
+
+if __name__ == "__main__":
+    main()
+
+    #
+    # player = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', \
+    #  'chocolate': 0}
+    #
+    # current_location = give_location_description(player)
+    # all_obstacles = add_map_boundaries(current_location)
+    # print(current_location["obstacles"])
+
+
+

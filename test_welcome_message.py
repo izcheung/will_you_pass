@@ -17,7 +17,7 @@ class TestWelcomeMessage(TestCase):
         printed_output = mock_output.getvalue()
         expected_output = ("Welcome to 'Pass COMP1510' Irene! You are a hopeless student with an average of 49.9% in "
                            "COMP1510. Out of desperation, you make a devious plan to bribe Chris with his favourite "
-                           "chocolates. Your first task is to collect 5 Reese's chocolates.\n")
+                           "chocolates to pass his course. Your first task is to collect 5 Reese's chocolates.\n")
         self.assertEqual(expected_output, printed_output)
 
     @patch('builtins.input', side_effect=["123"])
@@ -27,7 +27,7 @@ class TestWelcomeMessage(TestCase):
         printed_output = mock_output.getvalue()
         expected_output = ("Welcome to 'Pass COMP1510' 123! You are a hopeless student with an average of 49.9% in "
                            "COMP1510. Out of desperation, you make a devious plan to bribe Chris with his favourite "
-                           "chocolates. Your first task is to collect 5 Reese's chocolates.\n")
+                           "chocolates to pass his course. Your first task is to collect 5 Reese's chocolates.\n")
         self.assertEqual(expected_output, printed_output)
 
     @patch('builtins.input', side_effect=["#@!$%^><"])
@@ -37,7 +37,7 @@ class TestWelcomeMessage(TestCase):
         printed_output = mock_output.getvalue()
         expected_output = ("Welcome to 'Pass COMP1510' #@!$%^><! You are a hopeless student with an average of 49.9% "
                            "in COMP1510. Out of desperation, you make a devious plan to bribe Chris with his favourite "
-                           "chocolates. Your first task is to collect 5 Reese's chocolates.\n")
+                           "chocolates to pass his course. Your first task is to collect 5 Reese's chocolates.\n")
         self.assertEqual(expected_output, printed_output)
 
     @patch('builtins.input', side_effect=["#@#HI%*.27"])
@@ -47,5 +47,5 @@ class TestWelcomeMessage(TestCase):
         printed_output = mock_output.getvalue()
         expected_output = ("Welcome to 'Pass COMP1510' #@#HI%*.27! You are a hopeless student with an average of 49.9%"
                            " in COMP1510. Out of desperation, you make a devious plan to bribe Chris with his favourite"
-                           " chocolates. Your first task is to collect 5 Reese's chocolates.\n")
+                           " chocolates to pass his course. Your first task is to collect 5 Reese's chocolates.\n")
         self.assertEqual(expected_output, printed_output)

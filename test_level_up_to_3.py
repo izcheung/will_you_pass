@@ -42,3 +42,14 @@ class TestLevelUpTo3(TestCase):
                               "Why are pizza boxes square but pizzas are circular?": 12,
                               "Is the opposite of opposite the same or opposite": 8}
         self.assertEqual(expected, actual)
+
+
+    def test_level_up_to_3_return_empty_list(self):
+        player = {'name': 'Irene', 'level': 2, 'intelligence': 100, 'HP': 10, 'position': [3, 1], 'location': 'student_lounge',
+                  'chocolate': 10}
+        surprise_questions = {"Is the dress blue/black or white/gold?": 4, "Are hot dogs sandwiches?": 8,
+                              "Why are pizza boxes square but pizzas are circular?": 6,
+                              "Is the opposite of opposite the same or opposite": 4}
+        actual = level_up_to_3(player, surprise_questions)
+        expected = []
+        self.assertEqual(expected, actual)

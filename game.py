@@ -86,6 +86,47 @@ def add_map_boundaries(area_description):
             else:
                 area_description["obstacles"].append(tuple(wall))
 
+def initialize_map(player):
+    """
+    Initialize all the game maps by adding map boundaries and chocolate coordinates.
+
+    :param player: a string representing the name of the player's character
+    :precondition: player must be in the correct format
+    :precondition: generate_chocolate and add_map_boundaries functions work as intended
+    :postcondition: updated the area dictionary to include map boundaries and randomly generated chocolate coordinates
+    :return: a dictionary with nested dictionaries representing the map for each level
+    """
+    areas = {
+        'tech_hub': {
+            'rows': 8,
+            'columns': 7,
+            'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5),
+                          (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)],
+            'Chris': None
+        },
+        'student_lounge': {
+            'rows': 10,
+            'columns': 7,
+            'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3),
+                          (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7),
+                          (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)],
+            'Chris': None
+        },
+        'room_645': {
+            'rows': 4,
+            'columns': 12,
+            'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3)],
+            'Chris': (6, 1)
+        }
+    }
+    for area, area_description in areas.items():
+        add_map_boundaries(area_description)
+        if area != "room_645":
+            generate_chocolate(player, area_description)
+        else:
+            area_description["chocolate_coordinates"] = []
+    return areas
+
 
 
 def generate_chocolate(player, area_description):

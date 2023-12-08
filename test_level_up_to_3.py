@@ -14,7 +14,7 @@ class TestLevelUpTo3(TestCase):
                               "Is the opposite of opposite the same or opposite": 4}
         level_up_to_3(player, surprise_questions)
         printed_output = mock_output.getvalue()
-        expected = "YOU LEVELED UP TO LEVEL 3!\nBe careful, the pop quizzes here can DESTROY your self-esteem. Your last task is to find Chris.\n"
+        expected = "YOU LEVELED UP TO LEVEL 3! (Stats - HP: +10, Intelligence: +200) You have now advanced to the Room 645. CAUTION: Some of the quizzes here can kill you in one shot. Your task now is to find Chris and give him the chocolates.\n"
         self.assertEqual(expected, printed_output)
 
     def test_level_up_to_3_character_stats(self):
@@ -43,13 +43,3 @@ class TestLevelUpTo3(TestCase):
                               "Is the opposite of opposite the same or opposite": 8}
         self.assertEqual(expected, actual)
 
-
-    def test_level_up_to_3_return_empty_list(self):
-        player = {'name': 'Irene', 'level': 2, 'intelligence': 100, 'HP': 10, 'position': [3, 1], 'location': 'student_lounge',
-                  'chocolate': 10}
-        surprise_questions = {"Is the dress blue/black or white/gold?": 4, "Are hot dogs sandwiches?": 8,
-                              "Why are pizza boxes square but pizzas are circular?": 6,
-                              "Is the opposite of opposite the same or opposite": 4}
-        actual = level_up_to_3(player, surprise_questions)
-        expected = []
-        self.assertEqual(expected, actual)

@@ -128,6 +128,27 @@ def initialize_map(player):
     return areas
 
 
+def give_location_description(player, areas):
+    """
+    Returns a dictionary representing the description of a particular area.
+
+    :param player: a dictionary representing a character created for this game
+    :precondition: the player is provided in the correct format
+    :precondition: player location must be one of 'tech_hub', 'student_lounge', or 'room_645'
+    :postcondition: correctly return the dictionary that matches the character's current location
+    :return: a dictionary with information on the character's current location
+
+    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
+    >>> areas = {'tech_hub': {'rows': 8,'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)], 'Chris': None}, \
+    'student_lounge': {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None}, 'room_645': {'rows': 4, 'columns': 12, 'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3)], 'Chris': (6, 1)}}
+    >>> give_location_description(character, areas)
+    {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)], 'Chris': None}
+    """
+    for area, area_description in areas.items():
+        if player['location'] == area:
+            return area_description
+
+
 
 def generate_chocolate(player, area_description):
     """

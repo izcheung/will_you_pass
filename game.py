@@ -49,42 +49,6 @@ def make_character(player_name):
     return player
 
 
-def add_map_boundaries(area_description):
-    """
-    Add outside boundaries to the specified map.
-
-    :param area_description: a dictionary with information on the character's current location
-    :precondition: area_description is provided in the correct format
-    :postcondition: adds the boundary coordinates of the map to the map's list of obstacle coordinates
-    >>> description_of_area = {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)], 'Chris': None}
-    >>> add_map_boundaries(description_of_area)
-    >>> updated_obstacles = description_of_area["obstacles"]
-    >>> updated_obstacles == [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)]
-    True
-
-    >>> description_of_area = {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None}
-    >>> add_map_boundaries(description_of_area)
-    >>> updated_obstacles = description_of_area["obstacles"]
-    >>> updated_obstacles == [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9), (6, 9), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (6, 5), (6, 6)]
-    True
-    """
-    y_axis = int(area_description["rows"])
-    x_axis = int(area_description["columns"])
-
-    first_last_rows = [0, y_axis - 1]
-    for row in first_last_rows:
-        for column in range(x_axis):
-            wall = (column, row)
-            area_description["obstacles"].append(tuple(wall))
-
-    first_last_columns = [0, x_axis - 1]
-    for column in first_last_columns:
-        for row in range(y_axis):
-            wall = (column, row)
-            if wall in area_description["obstacles"]:
-                continue
-            else:
-                area_description["obstacles"].append(tuple(wall))
 
 def initialize_map(player):
     """
@@ -128,26 +92,42 @@ def initialize_map(player):
     return areas
 
 
-def give_location_description(player, areas):
+def add_map_boundaries(area_description):
     """
-    Returns a dictionary representing the description of a particular area.
+    Add outside boundaries to the specified map.
 
-    :param player: a dictionary representing a character created for this game
-    :precondition: the player is provided in the correct format
-    :precondition: player location must be one of 'tech_hub', 'student_lounge', or 'room_645'
-    :postcondition: correctly return the dictionary that matches the character's current location
-    :return: a dictionary with information on the character's current location
+    :param area_description: a dictionary with information on the character's current location
+    :precondition: area_description is provided in the correct format
+    :postcondition: adds the boundary coordinates of the map to the map's list of obstacle coordinates
+    >>> description_of_area = {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)], 'Chris': None}
+    >>> add_map_boundaries(description_of_area)
+    >>> updated_obstacles = description_of_area["obstacles"]
+    >>> updated_obstacles == [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)]
+    True
 
-    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
-    >>> areas = {'tech_hub': {'rows': 8,'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)], 'Chris': None}, \
-    'student_lounge': {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None}, 'room_645': {'rows': 4, 'columns': 12, 'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3)], 'Chris': (6, 1)}}
-    >>> give_location_description(character, areas)
-    {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7)], 'Chris': None}
+    >>> description_of_area = {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None}
+    >>> add_map_boundaries(description_of_area)
+    >>> updated_obstacles = description_of_area["obstacles"]
+    >>> updated_obstacles == [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9), (6, 9), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (6, 5), (6, 6)]
+    True
     """
-    for area, area_description in areas.items():
-        if player['location'] == area:
-            return area_description
+    y_axis = int(area_description["rows"])
+    x_axis = int(area_description["columns"])
 
+    first_last_rows = [0, y_axis - 1]
+    for row in first_last_rows:
+        for column in range(x_axis):
+            wall = (column, row)
+            area_description["obstacles"].append(tuple(wall))
+
+    first_last_columns = [0, x_axis - 1]
+    for column in first_last_columns:
+        for row in range(y_axis):
+            wall = (column, row)
+            if wall in area_description["obstacles"]:
+                continue
+            else:
+                area_description["obstacles"].append(tuple(wall))
 
 
 def generate_chocolate(player, area_description):
@@ -174,6 +154,31 @@ def generate_chocolate(player, area_description):
                 list_of_empty_coordinates.append((x_coordinate, y_coordinate))
     chocolate_coordinates = random.sample(list_of_empty_coordinates, 5)
     area_description["chocolate_coordinates"] = chocolate_coordinates
+
+
+def give_location_description(player, areas):
+    """
+    Returns a dictionary representing the description of a particular area.
+
+    :param player: a dictionary representing a character created for this game
+    :precondition: the player is provided in the correct format
+    :precondition: player location must be one of 'tech_hub', 'student_lounge', or 'room_645'
+    :postcondition: correctly return the dictionary that matches the character's current location
+    :return: a dictionary with information on the character's current location
+
+    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
+    >>> areas = {'tech_hub': {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(3, 3), (2, 3), (1, 3), (3, 5), (2, 5)]}, 'student_lounge': {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9), (6, 9), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(1, 3), (2, 3), (4, 4), (4, 5), (2, 4)]}, 'room_645': {'rows': 4, 'columns': 12, 'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), (0, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (0, 1), (0, 2), (11, 1), (11, 2)], 'Chris': (6, 1), 'chocolate_coordinates': []}}
+    >>> give_location_description(character, areas)
+    {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(3, 3), (2, 3), (1, 3), (3, 5), (2, 5)]}
+
+    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'student_lounge', 'chocolate': 0}
+    >>> areas = {'tech_hub': {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(3, 3), (2, 3), (1, 3), (3, 5), (2, 5)]}, 'student_lounge': {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9), (6, 9), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(1, 3), (2, 3), (4, 4), (4, 5), (2, 4)]}, 'room_645': {'rows': 4, 'columns': 12, 'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), (0, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (0, 1), (0, 2), (11, 1), (11, 2)], 'Chris': (6, 1), 'chocolate_coordinates': []}}
+    >>> give_location_description(character, areas)
+    {'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9), (6, 9), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(1, 3), (2, 3), (4, 4), (4, 5), (2, 4)]}
+    """
+    for area, area_description in areas.items():
+        if player['location'] == area:
+            return area_description
 
 
 def print_map(player, area_description):
@@ -254,13 +259,13 @@ def validate_move(player, area_description, direction):
     :postcondition: correctly check whether the move will result in a valid coordinate (within bounds and no obstacle)
     :return: a boolean - True if the move in the specified direction is valid and False otherwise
     >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'student_lounge', 'chocolate': 0}
-    >>> location_description = { 'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None }
+    >>> location_description = { 'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None, 'chocolate_coordinates': [(3, 3), (2, 3), (1, 3), (3, 5), (2, 5)] }
     >>> direction = 1
     >>> validate_move(character, location_description, direction)
     True
 
     >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [1, 2], 'location': 'student_lounge', 'chocolate': 0}
-    >>> location_description = { 'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None }
+    >>> location_description = { 'rows': 10, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (5, 1), (6, 1), (1, 2), (2, 2), (5, 2), (6, 2), (5, 3), (6, 3), (5, 4), (6, 4), (1, 5), (2, 5), (1, 6), (2, 6), (1, 7), (2, 7), (5, 7), (6, 7), (1, 8), (2, 8), (5, 8), (6, 8), (1, 9), (2, 9), (5, 9), (6, 9)], 'Chris': None, 'chocolate_coordinates': [(1, 3), (2, 3), (4, 4), (4, 5), (2, 4)]}
     >>> direction = 2
     >>> validate_move(character, location_description, direction)
     False
@@ -485,29 +490,6 @@ def is_alive(player):
         return False
 
 
-# def check_level(player, surprise_questions):
-#     """
-#     Checks the player's chocolate count and level to determine if the character meets the criteria for a level-up.
-#
-#     :param player: a dictionary representing the character created for this game
-#     :param surprise_questions: a dictionary of surprise pop quiz questions
-#     :precondition: player and surprise_questions are provided in the correct format
-#     :precondition: character has greater than 0 HP
-#     :postcondition: triggers the level up event once character meets the criterias
-#     :postcondition: updates the flower coordinates for the new map
-#     :return: a new, randomly generated list of chocolate coordinates
-#     """
-#     if player['chocolate'] == 5 and player['level'] == 1:
-#         chocolate_coordinates = level_up_to_2(player, surprise_questions)
-#         return chocolate_coordinates
-#
-#     elif player['chocolate'] == 10 and player['level'] == 2:
-#         chocolate_coordinates = level_up_to_3(player, surprise_questions)
-#         return chocolate_coordinates
-#
-#     else:
-#         return
-
 def update_HP_based_on_intelligence_for_final_exam(player):
     """
     Adjusts player health points based on intelligence points.
@@ -578,28 +560,29 @@ def game():
     player_name = welcome_message()
     character = make_character(player_name)
     maps_with_boundaries = initialize_map(character)
-    current_location = give_location_description(character, maps_with_boundaries)
-    quiz_attacks = make_quiz_questions()
-    print_map(character, current_location)
-    passed_comp1510 = False
-    while is_alive(character) and not passed_comp1510:
-        direction = get_user_choice(character)
-        valid_move = validate_move(character, current_location, direction)
-        if valid_move:
-            move_character(character, direction)
-            pick_up_chocolate(character, current_location)
-            if quiz_probability():
-                surprise_pop_quiz(character, quiz_attacks)
-            if character['chocolate'] == 5 and character['level'] == 1:
-                level_up_to_2(character, quiz_attacks)
-            elif character['chocolate'] == 10 and character['level'] == 2:
-                level_up_to_3(character, quiz_attacks)
-            current_location = give_location_description(character, maps_with_boundaries)
-            print_map(character, current_location)
-            if character["position"] == [6, 1] and character["location"] == "room_645":
-                passed_comp1510 = final_exam(character)
-        else:
-            print("\nYou can't go there!")
+    print(maps_with_boundaries)
+    # current_location = give_location_description(character, maps_with_boundaries)
+    # quiz_attacks = make_quiz_questions()
+    # print_map(character, current_location)
+    # passed_comp1510 = False
+    # while is_alive(character) and not passed_comp1510:
+    #     direction = get_user_choice(character)
+    #     valid_move = validate_move(character, current_location, direction)
+    #     if valid_move:
+    #         move_character(character, direction)
+    #         pick_up_chocolate(character, current_location)
+    #         if quiz_probability():
+    #             surprise_pop_quiz(character, quiz_attacks)
+    #         if character['chocolate'] == 5 and character['level'] == 1:
+    #             level_up_to_2(character, quiz_attacks)
+    #         elif character['chocolate'] == 10 and character['level'] == 2:
+    #             level_up_to_3(character, quiz_attacks)
+    #         current_location = give_location_description(character, maps_with_boundaries)
+    #         print_map(character, current_location)
+    #         if character["position"] == [6, 1] and character["location"] == "room_645":
+    #             passed_comp1510 = final_exam(character)
+    #     else:
+    #         print("\nYou can't go there!")
 
 
 def main():

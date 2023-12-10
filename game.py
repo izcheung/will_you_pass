@@ -185,10 +185,10 @@ def print_map(player, area_description):
 
     >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': \
     'room_645', 'chocolate': 0}
-    >>> location_description = {'rows': 4, 'columns': 12, 'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), \
-    (1, 3), (10, 3), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), \
-    (0, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (0, 1), (0, 2), \
-    (11, 1), (11, 2)], 'Chris': (6, 1), 'chocolate_coordinates': []}
+    >>> location_description = {'rows': 4, 'columns': 12, 'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), \
+    (10, 2), (1, 3), (10, 3), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), \
+    (10, 0), (11, 0), (0, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3),\
+     (11, 3), (0, 1), (0, 2), (11, 1), (11, 2)], 'Chris': (6, 1), 'chocolate_coordinates': []}
     >>> print_map(character, location_description)
     ############
     ###*  C##  #
@@ -647,8 +647,8 @@ def game():
     """
     player_name = welcome_message()
     character = make_character(player_name)
-    maps_with_boundaries = initialize_map(character)
-    current_location = give_location_description(character, maps_with_boundaries)
+    map_with_boundaries_and_chocolate = initialize_map(character)
+    current_location = give_location_description(character, map_with_boundaries_and_chocolate)
     quiz_attacks = make_quiz_questions()
     print_map(character, current_location)
     passed_comp1510 = False
@@ -664,7 +664,7 @@ def game():
                 quiz_attacks = level_up_to_2(character, quiz_attacks)
             elif character['chocolate'] == 10 and character['level'] == 2:
                 quiz_attacks = level_up_to_3(character, quiz_attacks)
-            current_location = give_location_description(character, maps_with_boundaries)
+            current_location = give_location_description(character, map_with_boundaries_and_chocolate)
             print_map(character, current_location)
             if character["position"] == [6, 1] and character["location"] == "room_645":
                 final_exam_intro(character)

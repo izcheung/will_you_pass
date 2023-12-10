@@ -380,7 +380,7 @@ def surprise_pop_quiz(player, surprise_questions):
         player['HP'] -= surprise_questions.get(random_attack)
         if player['HP'] > 0:
             print(
-                f"Your HP takes a hit! -{surprise_questions.get(random_attack)} points. Current HP is/"
+                f"Your HP takes a hit! -{surprise_questions.get(random_attack)} points. Current HP is"
                 f" {player['HP']}.\n")
 
 

@@ -428,7 +428,7 @@ pizzas are circular?': 12, 'Is the opposite of opposite the same or opposite': 8
     player["location"] = "room_645"
     player["position"] = [1, 2]
     print(
-        f"YOU LEVELED UP TO LEVEL 3! (Stats - HP: {player["HP"]} (+10), Intelligence: {player["intelligence"]} (+200"
+        f"YOU LEVELED UP TO LEVEL 3! (Stats - HP: {player['HP']} (+10), Intelligence: {player['intelligence']} (+200"
         f")) You have now advanced to the Room 645. CAUTION: Some of the quizzes here can kill you in one shot. Your "
         f"task now is to find Chris and give him the chocolates.")
     return {each_question: value * 2 for each_question, value in surprise_questions.items()}
@@ -464,8 +464,8 @@ Student Lounge. Be careful, the quizzes now deal twice the damage!
     player["location"] = "student_lounge"
     player["position"] = [3, 1]
     print(
-        f"YOU LEVELED UP TO LEVEL 2! (Stats - HP: {player["HP"]} (+10), Intelligence: "
-        f"{player["intelligence"]} (+100)) You have now advanced to the Student Lounge. Be careful, "
+        f"YOU LEVELED UP TO LEVEL 2! (Stats - HP: {player['HP']} (+10), Intelligence: "
+        f"{player['intelligence']} (+100)) You have now advanced to the Student Lounge. Be careful, "
         f"the quizzes now deal twice the damage!")
     return {each_question: value * 2 for each_question, value in surprise_questions.items()}
 

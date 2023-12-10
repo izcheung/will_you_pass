@@ -16,5 +16,8 @@ icheung24
 
 ## Any important comments you'd like to make about your work:
 
-The surprise questions do not have a specific answer. The answer is a randomly generated number that you have to guess 
-correctly!
+The character, boundaries, chocolate, and Chris are represented as *, #, !, and C respectively. 
+The objective of the game is to collect all ten chocolates while you try to survive the pop quizzes
+thrown at you randomly. The answers are randomly generated, so you must try to guess the right answer. 
+After collecting 5 and 10 chocolates, you level up to 2 and 3 respectively. Once you reach level 3, you need to
+deliver the chocolates to Chris. Each level has a different map and the damage power of the quizzes increase each level.

@@ -3,7 +3,6 @@ Irene Cheung
 A01349998
 """
 
-import io
 import unittest
 from unittest.mock import patch
 from game import generate_chocolate
@@ -31,9 +30,8 @@ class TestGenerateChocolate(unittest.TestCase):
     @patch('random.sample', side_effect=lambda population, k: [(0, 3)] if k == 1 else [(0, 3), (0, 0), (1, 3),
                                                                                        (0, 2), (2, 0)])
     def test_generate_chocolate_student_lounge(self, _):
-        player = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location':
-            'student_lounge',
-                  'chocolate': 0}
+        player = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1],
+                  'location': 'student_lounge', 'chocolate': 0}
         area_description = {
             'rows': 10,
             'columns': 7,

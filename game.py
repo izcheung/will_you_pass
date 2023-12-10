@@ -346,7 +346,7 @@ def make_quiz_questions():
     >>> question_choices = make_quiz_questions()
     >>> print(question_choices)
     {'Is the dress blue/black or \
-white/gold?\\nChoices:\\n1: Blue/black\\n2: White/gold:\\n3: Neither\\n4: Both': 2, 'Are hot dogs \
+white/gold?\\nChoices:\\n1: Blue/black\\n2: White/gold\\n3: Neither\\n4: Both': 2, 'Are hot dogs \
 sandwiches?\\nChoices:\\n1: Yes\\n2: No, they are tacos.\\n3: No, they cannot be classified as anything other \
 than hot dogs.\\n4: Maybe, it depends on my mood': 4, 'Why are pizza boxes square but pizzas are \
 circular?\\nChoices:\\n1: Because it is cheaper\\n2: Because it is easier to take out a slice when the box is \
@@ -355,7 +355,7 @@ the same or opposite?\\nChoices:\\n1: Same\\n2: Opposite\\n3: Opposite opposite\
 
     """
     surprise_questions = {
-        'Is the dress blue/black or white/gold?\nChoices:\n1: Blue/black\n2: White/gold:\n3: Neither\n4: Both': 2,
+        'Is the dress blue/black or white/gold?\nChoices:\n1: Blue/black\n2: White/gold\n3: Neither\n4: Both': 2,
         'Are hot dogs sandwiches?\nChoices:\n1: Yes\n2: No, they are tacos.\n3: No, they cannot be classified as '
         'anything other than hot dogs.\n4: Maybe, it depends on my mood': 4,
         'Why are pizza boxes square but pizzas are circular?\nChoices:\n1: Because it is cheaper\n2: Because it is '

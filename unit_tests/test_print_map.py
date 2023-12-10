@@ -1,8 +1,6 @@
 import io
 from unittest import TestCase
 from unittest.mock import patch
-from game import generate_chocolate
-from game import add_map_boundaries
 from game import print_map
 
 

@@ -29,7 +29,6 @@ class TestQuizProbability(TestCase):
         actual = quiz_probability()
         self.assertEqual(expected, actual)
 
-
     @patch('random.randint', return_value=5)
     def test_quiz_probability_quiz_not_initiated_5(self, _):
         expected = False

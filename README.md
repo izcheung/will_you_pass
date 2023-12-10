@@ -16,4 +16,5 @@ icheung24
 
 ## Any important comments you'd like to make about your work:
 
-No comments.
+The surprise questions do not have a specific answer. The answer is a randomly generated number that you have to guess 
+correctly!

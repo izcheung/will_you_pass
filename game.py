@@ -225,12 +225,17 @@ def get_user_choice():
     :return: a string representing the direction chosen by the user
     """
     while True:
-        direction = input('[1] North, [2] South, [3] East, [4] West\nPlease enter the number that corresponds to/'
-                          'the direction you want to go: ')
-        if direction in ['1', '2', '3', '4']:
-            return direction
+        try:
+            direction = int(
+                input('[1] North, [2] South, [3] East, [4] West\nPlease enter the number that corresponds to/'
+                      'the direction you want to go: '))
+        except ValueError:
+            print('Direction must be an integer.')
+            continue
+        if direction < 0 or direction > 4:
+            print('Direction must be between 1 and 4, inclusive.')
         else:
-            print("Invalid direction. ")
+            return str(direction)
 
 
 def validate_move(player, area_description, direction):

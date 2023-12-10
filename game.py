@@ -182,8 +182,6 @@ def print_map(player, area_description):
     :precondition: player, area_description, and chocolate_coordinates are in the correct format
     :precondition: character has greater than 0 HP
     :postcondition: print the map with the correct representations for obstacle, chris, chocolates, and position
-
-    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
     """
     for row in range(area_description["rows"]):
         for column in range(area_description["columns"]):
@@ -382,7 +380,8 @@ def surprise_pop_quiz(player, surprise_questions):
         player['HP'] -= surprise_questions.get(random_attack)
         if player['HP'] > 0:
             print(
-                f"Your HP takes a hit! -{surprise_questions.get(random_attack)} points. Current HP is {player['HP']}.\n")
+                f"Your HP takes a hit! -{surprise_questions.get(random_attack)} points. Current HP is/"
+                f" {player['HP']}.\n")
 
 
 def level_up_to_3(player, surprise_questions):
@@ -451,7 +450,9 @@ Student Lounge. Be careful, the quizzes now deal twice the damage!
     player["location"] = "student_lounge"
     player["position"] = [3, 1]
     print(
-        f"YOU LEVELED UP TO LEVEL 2! (Stats - HP: {player["HP"]} (+10), Intelligence: {player["intelligence"]} (+100)) You have now advanced to the Student Lounge. Be careful, the quizzes now deal twice the damage!")
+        f"YOU LEVELED UP TO LEVEL 2! (Stats - HP: {player["HP"]} (+10), Intelligence: "
+        f"{player["intelligence"]} (+100)) You have now advanced to the Student Lounge. Be careful, "
+        f"the quizzes now deal twice the damage!")
     return {each_question: value * 2 for each_question, value in surprise_questions.items()}
 
 
@@ -483,8 +484,13 @@ def pick_up_chocolate(player, area_description):
     [(2, 3), (1, 3), (3, 5), (2, 5)]
 
 
-    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub', 'chocolate': 0}
-    >>> location = {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(3, 3), (2, 3), (1, 3), (3, 5), (2, 5)]}
+    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': \
+    'tech_hub', 'chocolate': 0}
+    >>> location = {'rows': 8, 'columns': 7, 'obstacles': [(1, 1), (2, 1), (1, 2), (2, 2), (6, 2), (5, 3), \
+    (6, 3), (1, 4), (6, 4), (1, 5), (1, 6), (1, 7), (2, 7), (3, 7), (4, 7), (0, 0), (1, 0), (2, 0), (3, 0),\
+     (4, 0), (5, 0), (6, 0), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (0, 1), (0, 2), (0, 3), \
+     (0, 4), (0, 5), (0, 6), (6, 1), (6, 5), (6, 6)], 'Chris': None, 'chocolate_coordinates': [(3, 3), (2, 3), (1, 3),\
+      (3, 5), (2, 5)]}
     >>> pick_up_chocolate(character, location)
 
     >>> chocolate_places = location["chocolate_coordinates"]

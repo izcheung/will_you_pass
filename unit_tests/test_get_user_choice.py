@@ -30,32 +30,25 @@ class TestGetUserChoice(TestCase):
         self.assertEqual(expected, actual)
 
     # Invalid direction - cannot test invalid direction by itself due to infinite loop
-    @patch('builtins.input', side_effect=["0", "1"])
-    def test_get_user_choice_invalid_direction_and_then_valid_return(self, _):
-        expected = "1"
-        actual = get_user_choice()
-        self.assertEqual(expected, actual)
-
-
-    @patch('builtins.input', side_effect=["0", "1"])
-    @patch('sys.stdout', new_callable=io.StringIO)
-    def test_get_user_choice_invalid_direction_and_then_valid_print(self, mock_output, _):
-        get_user_choice()
-        printed = mock_output.getvalue()
-        expected = "Invalid direction. \n"
-        self.assertEqual(expected, printed)
-
-    @patch('builtins.input', side_effect=["a", "1"])
-    def test_get_user_choice_invalid_direction_and_then_valid_letter_return(self, _):
+    @patch('builtins.input', side_effect=["5", "1"])
+    def test_get_user_choice_invalid_direction_and_then_valid_direction(self, _):
         expected = "1"
         actual = get_user_choice()
         self.assertEqual(expected, actual)
 
     @patch('builtins.input', side_effect=["a", "1"])
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_get_user_choice_invalid_direction_and_then_valid_letter_print(self, mock_output, _):
+    def test_get_user_choice_invalid_direction_out_of_range_printed(self, mock_output, _):
+        expected = "Direction must be an integer.\n"
+        get_user_choice()
+        printed_output = mock_output.getvalue()
+        self.assertEqual(expected, printed_output)
+
+    @patch('builtins.input', side_effect=["5", "1"])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_get_user_choice_invalid_direction_letters_input_printed(self, mock_output, _):
         get_user_choice()
         printed = mock_output.getvalue()
-        expected = "Invalid direction. \n"
+        expected = "Direction must be between 1 and 4, inclusive.\n"
         self.assertEqual(expected, printed)
 

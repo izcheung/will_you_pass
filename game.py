@@ -182,6 +182,20 @@ def print_map(player, area_description):
     :precondition: player, area_description, and chocolate_coordinates are in the correct format
     :precondition: character has greater than 0 HP
     :postcondition: print the map with the correct representations for obstacle, chris, chocolates, and position
+
+    >>> character = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': \
+    'room_645', 'chocolate': 0}
+    >>> location_description = {'rows': 4, 'columns': 12, 'obstacles': [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), \
+    (1, 3), (10, 3), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), \
+    (0, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (0, 1), (0, 2), \
+    (11, 1), (11, 2)], 'Chris': (6, 1), 'chocolate_coordinates': []}
+    >>> print_map(character, location_description)
+    ############
+    ###*  C##  #
+    #         ##
+    ############
+    You are at position [3, 1]
+    <BLANKLINE>
     """
     for row in range(area_description["rows"]):
         for column in range(area_description["columns"]):

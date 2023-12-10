@@ -40,5 +40,3 @@ class TestMovePlayer(TestCase):
         expected = [2, 1]
         actual = player["position"]
         self.assertEqual(expected, actual)
-
-

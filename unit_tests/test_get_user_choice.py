@@ -51,4 +51,3 @@ class TestGetUserChoice(TestCase):
         printed = mock_output.getvalue()
         expected = "Direction must be between 1 and 4, inclusive.\n"
         self.assertEqual(expected, printed)
-

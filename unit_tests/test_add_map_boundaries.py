@@ -38,9 +38,11 @@ class TestAddMapBoundaries(TestCase):
                                'Chris': (6, 1)}
         add_map_boundaries(description_of_area)
         actual = description_of_area["obstacles"]
-        expected = [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), (0, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (0, 1), (0, 2), (11, 1), (11, 2)]
+        expected = [(1, 1), (2, 1), (3, 1), (7, 1), (8, 1), (10, 2), (1, 3), (10, 3), (0, 0), (1, 0), (2, 0),
+                    (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), (0, 3), (1, 3), (2, 3),
+                    (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (0, 1), (0, 2), (11, 1),
+                    (11, 2)]
         self.assertEqual(expected, actual)
-
 
     def test_add_map_boundaries_large_square_map_no_obstacles(self):
         location_description = {'rows': 7, 'columns': 7, 'obstacles': [], 'Chris': None}
@@ -96,4 +98,3 @@ class TestAddMapBoundaries(TestCase):
         actual = location_description["obstacles"]
         expected = [(0, 0), (0, 0), (0, 0)]
         self.assertEqual(expected, actual)
-

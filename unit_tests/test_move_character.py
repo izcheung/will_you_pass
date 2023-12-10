@@ -3,7 +3,7 @@ from unittest import TestCase
 from game import move_character
 
 
-class TestMoveplayer(TestCase):
+class TestMovePlayer(TestCase):
 
     def test_move_character_north(self):
         player = {'name': 'Irene', 'level': 1, 'intelligence': 0, 'HP': 10, 'position': [3, 1], 'location': 'tech_hub',

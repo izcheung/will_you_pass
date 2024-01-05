@@ -6,10 +6,6 @@ This is written in markdown. Read about markdown here: [markdowncheatsheet](http
 
 Irene Cheung
 
-## Your student number:
-
-A01349998
-
 ## Your GitHub username:
 
 icheung24

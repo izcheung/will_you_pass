@@ -6,10 +6,6 @@ This is written in markdown. Read about markdown here: [markdowncheatsheet](http
 
 Irene Cheung
 
-## Your GitHub username:
-
-icheung24
-
 ## Any important comments you'd like to make about your work:
 
 The character, boundaries, chocolate, and Chris are represented as *, #, !, and C respectively. 

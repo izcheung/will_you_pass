@@ -1,15 +1,5 @@
-Every program needs a README.md
+# Project: "PASS COMP1510"
 
-This is written in markdown. Read about markdown here: [markdowncheatsheet](https://www.markdownguide.org/cheat-sheet/)
+## Summary
+"PASS COMP1510" is a command-line, text-based game that features a grid-based environment where a player can move a character in four cardinal directions. The game features a whimsical scenario where a student (the player) desperate to pass the course, must gain the favour of the instructor by collecting 10 of the instructor's favourite chocolates and deliver it to the instructor. Along the way, the student will be faced with pop quizzes that are triggered at random. The student will have to advance through 3 levels, each with a different map inspired by the BCIT campus to reach the instructor. Upon reaching the instructor, the student will be faced with the final test, where depending on the 'level of intelligence' that the student accumulated from the pop quizzes, will be given a number of tries to answer the instructor's questions. If the student successfully answers the three questions, the student passes the course, and if not, will have to start from the beginning.
 
-## Your name:
-
-Irene Cheung
-
-## Any important comments you'd like to make about your work:
-
-The character, boundaries, chocolate, and Chris are represented as *, #, !, and C respectively. 
-The objective of the game is to collect all ten chocolates while you try to survive the pop quizzes
-thrown at you randomly. The answers are randomly generated, so you must try to guess the right answer. 
-After collecting 5 and 10 chocolates, you level up to 2 and 3 respectively. Once you reach level 3, you need to
-deliver the chocolates to Chris. Each level has a different map and the damage power of the quizzes increase each level.

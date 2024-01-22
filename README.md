@@ -1,4 +1,4 @@
-# Project: "PASS COMP1510"
+# Project: "Will you pass?"
 
 ## Summary
 "PASS COMP1510" is a command-line, text-based game that features a grid-based environment where a player can move a character in four cardinal directions. The game features a whimsical scenario where a student (the player) desperate to pass the course, must gain the favour of the instructor by collecting 10 of the instructor's favourite chocolates and deliver it to the instructor. 

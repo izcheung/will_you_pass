@@ -17,9 +17,9 @@ def welcome_message():
     player_name = ""
     while len(player_name) == 0:
         player_name = input("Please enter your character name: ")
-    print(f"Welcome to 'Pass COMP1510' {player_name}! You are a hopeless student with an average of 49.9% in COMP1510. "
-          f"Out of desperation, you make a devious plan to bribe Chris with his favourite chocolates to pass his "
-          f"course. Your task is to collect 10 Reese's chocolates and then deliver it to him.")
+    print(f"\nWelcome to 'Chocopass' {player_name}! You are a hopeless student with an average of 49.9% in COMP1510. "
+          f"Out of desperation, you make a devious plan to bribe your instructor with his favourite chocolates to "
+          f"pass his course. Your task is to collect 10 Reese's chocolates and then deliver it to him.")
     return player_name
 
 

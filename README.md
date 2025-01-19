@@ -1,5 +1,7 @@
 # ChocoPass
 
+![image](https://github.com/user-attachments/assets/8dd6822d-565b-48fc-8a05-8fe094b2cbc0)
+
 ## Summary
 "ChocoPass" is a command-line, text-based game that features a grid-based environment where a player can move a character in four cardinal directions. The game features a whimsical scenario where a student (the player) desperate to pass the course, must gain the favour of the instructor by collecting 10 of the instructor's favourite chocolates and deliver it to the instructor. 
 
